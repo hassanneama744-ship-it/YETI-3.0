@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Snowmap: React.FC = () => {
@@ -7,7 +6,7 @@ const Snowmap: React.FC = () => {
       step: "STEP 1",
       title: "THE AVALANCHE",
       points: [
-        "Token Pre Sale on Dev.FUN", 
+        "Community building", 
         "Pump.fun Launch", 
         "Pump Swap Migration AND DEX Screener Boosting", 
         "Frost Staking (Freeze Your Token)"

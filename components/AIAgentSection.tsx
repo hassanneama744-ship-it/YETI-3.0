@@ -20,7 +20,8 @@ import {
   AlertCircle,
   ExternalLink,
   Copy,
-  Check
+  Check,
+  RefreshCw
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 
@@ -36,24 +37,14 @@ interface QuestSubmission {
   points: number;
 }
 
-const MOCK_TWEETS = [
-  { 
-    id: 't1', 
-    text: "The blizzard is coming. $YETI isn't just a coin, it's a movement. #Solana #YetiPack ❄️🚀", 
-    date: '2h ago',
-    likes: '1.2k',
-    rts: '450',
-    points: { like: 5, repost: 15 }
-  },
-  { 
-    id: 't2', 
-    text: "Why stay warm when you can stay FROSTY? New utility reveal at 1M Mcap! 🧊💎", 
-    date: '5h ago',
-    likes: '890',
-    rts: '210',
-    points: { like: 5, repost: 15 }
-  }
-];
+interface TweetQuest {
+  id: string;
+  text: string;
+  date: string;
+  likes: string;
+  rts: string;
+  points: { like: number; repost: number };
+}
 
 const InfoMarquee: React.FC = () => {
   const label = "USE YETI ORACLE PROMPTS IN THE MEME LAB TO GENERATE YOUR OWN ABOMINABLE MASTERPIECES • ";
@@ -79,12 +70,15 @@ const AIAgentSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   
   // Quest States
+  const [quests, setQuests] = useState<TweetQuest[]>([]);
+  const [isLoadingQuests, setIsLoadingQuests] = useState(false);
   const [submissions, setSubmissions] = useState<QuestSubmission[]>([]);
   const [userPoints, setUserPoints] = useState(0);
   const [twitterHandle, setTwitterHandle] = useState("");
   const [verifyingId, setVerifyingId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // Typewriter effect for Oracle
   useEffect(() => {
     if (inspiration) {
       let i = 0;
@@ -98,6 +92,64 @@ const AIAgentSection: React.FC = () => {
     }
   }, [inspiration]);
 
+  // Fetch real-time tweets when entering Quest mode
+  useEffect(() => {
+    if (view === 'quest' && quests.length === 0) {
+      fetchRealTimeQuests();
+    }
+  }, [view]);
+
+  const fetchRealTimeQuests = async () => {
+    setIsLoadingQuests(true);
+    setErrorMsg(null);
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const response = await ai.models.generateContent({
+        model: 'gemini-3-flash-preview',
+        contents: "ACT AS A SCRAPER. Use Google Search to find the 3 most recent tweets from X (Twitter) handle @theyeticoin. Provide the results strictly in a JSON array format. Each object must have keys: 'id', 'text', 'date', 'likes', 'rts'. Example output: [{\"id\": \"1\", \"text\": \"Stay frosty!\", \"date\": \"2h ago\", \"likes\": \"420\", \"rts\": \"69\"}]. Do not explain anything, just the JSON.",
+        config: {
+          tools: [{ googleSearch: {} }]
+        }
+      });
+
+      const text = response.text || "";
+      // Robust JSON extraction
+      const startIdx = text.indexOf('[');
+      const endIdx = text.lastIndexOf(']');
+      
+      if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+        const jsonStr = text.substring(startIdx, endIdx + 1);
+        const parsed = JSON.parse(jsonStr);
+        
+        if (Array.isArray(parsed)) {
+          const formattedQuests = parsed.map((q: any) => ({
+            id: String(q.id || Math.random()),
+            text: String(q.text || "Yeti data unavailable"),
+            date: String(q.date || "Unknown"),
+            likes: String(q.likes || "0"),
+            rts: String(q.rts || "0"),
+            points: { like: 5, repost: 15 }
+          }));
+          setQuests(formattedQuests);
+        } else {
+          throw new Error("Invalid array format");
+        }
+      } else {
+        throw new Error("Could not find JSON array in response");
+      }
+    } catch (error) {
+      console.error("Feed fetch error:", error);
+      showError("FEED UNAVAILABLE. THE PACK IS RE-CALIBRATING...");
+      // Add a fallback mock if fetch fails to keep UI alive
+      setQuests([
+        { id: 'fb1', text: "YETI IS BUILDING IN THE BLIZZARD. ❄️", date: "1h ago", likes: "1.2k", rts: "400", points: { like: 5, repost: 15 } },
+        { id: 'fb2', text: "STAY FROSTY. THE PEAK IS NEAR. 🏔️", date: "3h ago", likes: "890", rts: "250", points: { like: 5, repost: 15 } }
+      ]);
+    } finally {
+      setIsLoadingQuests(false);
+    }
+  };
+
   const generateAIInspiration = async () => {
     if (isInspiring) return;
     setIsInspiring(true);
@@ -108,7 +160,7 @@ const AIAgentSection: React.FC = () => {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
-        contents: "Generate a hilarious, high-energy, and bullish 'Yeti Meme Prophecy' for the $YETI coin on Solana. Use degen slang (LFG, moon, green candles) and yeti-themed winter imagery. Make it funny and punchy. Max 20 words.",
+        contents: "Generate a hilarious, high-energy, and bullish 'Yeti Meme Prophecy' for the $YETI coin on Solana. Use degen slang (LFG, moon, green candles) and yeti-themed winter imagery. Max 20 words.",
         config: { temperature: 1.0 }
       });
       const text = response.text || "THE YETI HAS SPOKEN: GREEN CANDLES ARE COMING TO FREEZE THE BEARS. LFG! ❄️🚀";
@@ -182,10 +234,10 @@ const AIAgentSection: React.FC = () => {
       <InfoMarquee />
 
       <div className="w-full flex flex-col items-center py-8 px-4">
-        {/* Error Popup */}
+        {/* Error Popup - Removed text-white */}
         {errorMsg && (
           <div className="fixed top-24 z-[60] animate-in slide-in-from-top duration-300">
-            <div className="bg-[#FF4D4D] text-white border-[3px] border-black px-6 py-3 rounded-2xl flex items-center gap-3 neo-shadow">
+            <div className="bg-[#FF4D4D] text-black border-[3px] border-black px-6 py-3 rounded-2xl flex items-center gap-3 neo-shadow">
               <AlertCircle className="w-5 h-5" />
               <span className="font-bungee text-xs uppercase">{errorMsg}</span>
             </div>
@@ -197,13 +249,13 @@ const AIAgentSection: React.FC = () => {
           <div className="bg-white border-[3px] border-black rounded-3xl p-1.5 flex gap-1 neo-shadow-sm">
             <button 
               onClick={() => setView('oracle')}
-              className={`px-6 py-2 rounded-2xl font-bungee text-xs transition-all ${view === 'oracle' ? 'bg-[#1EB7E9] text-black' : 'text-gray-400 hover:text-black'}`}
+              className={`px-6 py-2 rounded-2xl font-bungee text-xs transition-all ${view === 'oracle' ? 'bg-black text-[#1EB7E9]' : 'text-gray-400 hover:text-black'}`}
             >
               ORACLE
             </button>
             <button 
               onClick={() => setView('quest')}
-              className={`px-6 py-2 rounded-2xl font-bungee text-xs transition-all ${view === 'quest' ? 'bg-[#1EB7E9] text-black' : 'text-gray-400 hover:text-black'}`}
+              className={`px-6 py-2 rounded-2xl font-bungee text-xs transition-all ${view === 'quest' ? 'bg-black text-[#1EB7E9]' : 'text-gray-400 hover:text-black'}`}
             >
               QUESTS
             </button>
@@ -254,11 +306,11 @@ const AIAgentSection: React.FC = () => {
               {isInspiring ? (
                 <div className="flex flex-col items-center gap-4">
                   <Loader2 className="w-8 h-8 animate-spin text-[#1EB7E9]" />
-                  <p className="font-bungee text-xs text-gray-300">SYNCHRONIZING VOID...</p>
+                  <p className="font-bungee text-xs text-gray-400 uppercase">SYNCHRONIZING VOID...</p>
                 </div>
               ) : inspiration ? (
                 <div className="space-y-6 flex flex-col items-center">
-                  <p className="font-bungee text-lg md:text-xl text-black leading-relaxed text-center px-4">
+                  <p className="font-bungee text-lg md:text-xl text-black leading-relaxed text-center px-4 uppercase">
                     "{typewriterText}"
                   </p>
                   <button 
@@ -296,10 +348,10 @@ const AIAgentSection: React.FC = () => {
                     <UserPlus className="w-7 h-7 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-bungee text-xl text-black">FOLLOW PACK</h3>
+                    <h3 className="font-bungee text-xl text-black uppercase">FOLLOW PACK</h3>
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">SYNC YOUR HANDLE FOR REWARDS</p>
                   </div>
-                  <div className="ml-auto bg-[#FFEA31] border-2 border-black px-4 py-1 rounded-xl font-bungee text-[10px]">+10 PTS</div>
+                  <div className="ml-auto bg-[#FFEA31] border-2 border-black px-4 py-1 rounded-xl font-bungee text-[10px] text-black">+10 PTS</div>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 items-center">
@@ -313,7 +365,7 @@ const AIAgentSection: React.FC = () => {
                   <button 
                     onClick={verifyFollow}
                     disabled={verifyingId === 'follow' || submissions.some(s => s.type === 'follow')}
-                    className="w-full md:w-auto bg-black text-white px-8 py-3.5 rounded-xl font-bungee text-[10px] neo-shadow hover:translate-x-1 transition-all disabled:opacity-50"
+                    className="w-full md:w-auto bg-black text-[#1EB7E9] px-8 py-3.5 rounded-xl font-bungee text-[10px] neo-shadow hover:translate-x-1 transition-all disabled:opacity-50"
                   >
                     {verifyingId === 'follow' ? "SYNCING..." : "INITIALIZE SYNC"}
                   </button>
@@ -321,7 +373,10 @@ const AIAgentSection: React.FC = () => {
               </div>
 
               <div className="bg-white border-[4px] border-black rounded-[32px] p-6 neo-shadow space-y-6">
-                 <h3 className="font-bungee text-lg text-black border-b-2 border-gray-100 pb-4 tracking-tight">OPERATION HISTORY</h3>
+                 <div className="flex items-center justify-between border-b-2 border-gray-100 pb-4">
+                    <h3 className="font-bungee text-lg text-black tracking-tight uppercase">OPERATION HISTORY</h3>
+                    <div className="bg-slate-100 px-3 py-1 rounded-lg text-[8px] font-black uppercase text-gray-400">TELEMETRY_LOGS</div>
+                 </div>
                  {submissions.length === 0 ? (
                    <div className="py-8 text-center text-gray-300">
                      <ZapOff className="w-8 h-8 mx-auto mb-2 opacity-20" />
@@ -330,7 +385,7 @@ const AIAgentSection: React.FC = () => {
                  ) : (
                    <div className="space-y-3">
                      {submissions.map(sub => (
-                       <div key={sub.id} className="bg-slate-50 border-2 border-black/5 p-3 rounded-xl flex items-center justify-between">
+                       <div key={sub.id} className="bg-slate-50 border-2 border-black/5 p-3 rounded-xl flex items-center justify-between animate-in slide-in-from-left duration-300">
                          <div className="flex items-center gap-4">
                            <div className="w-7 h-7 bg-emerald-100 rounded-lg flex items-center justify-center">
                              <CheckCircle className="w-3 h-3 text-emerald-500" />
@@ -346,47 +401,90 @@ const AIAgentSection: React.FC = () => {
             </div>
 
             <div className="lg:col-span-4 space-y-6">
-              <div className="bg-white border-[4px] border-black rounded-[32px] p-6 neo-shadow overflow-hidden">
+              <div className="bg-white border-[4px] border-black rounded-[32px] p-6 neo-shadow overflow-hidden relative">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="font-bungee text-[10px] text-black uppercase tracking-widest">AUTO_QUEST_FEED</h3>
-                  <div className="w-2 h-2 rounded-full bg-[#1EB7E9] animate-pulse"></div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bungee text-[10px] text-black uppercase tracking-widest">AUTO_QUEST_FEED</h3>
+                    <div className="w-2 h-2 rounded-full bg-[#1EB7E9] animate-pulse"></div>
+                  </div>
+                  <button 
+                    onClick={fetchRealTimeQuests}
+                    disabled={isLoadingQuests}
+                    className="p-2 bg-slate-50 border-2 border-black rounded-lg hover:bg-slate-100 transition-all disabled:opacity-50"
+                  >
+                    <RefreshCw className={`w-3 h-3 text-black ${isLoadingQuests ? 'animate-spin' : ''}`} />
+                  </button>
                 </div>
                 
-                <div className="space-y-8">
-                  {MOCK_TWEETS.map(tweet => (
-                    <div key={tweet.id} className="space-y-4 border-b-2 border-gray-50 pb-6 last:border-0">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-[#9BDDFF] rounded-lg border-2 border-black flex items-center justify-center">
-                          <Ghost className="w-4 h-4 text-black" />
-                        </div>
-                        <span className="font-black text-[9px] text-black">@theyeticoin</span>
-                      </div>
-                      <p className="text-[10px] font-bold text-gray-500 uppercase leading-relaxed italic">"{tweet.text}"</p>
-                      <div className="grid grid-cols-2 gap-3">
-                        <button 
-                          onClick={() => verifyTweetAction(tweet.id, 'like', tweet.points.like)}
-                          disabled={!!verifyingId || submissions.some(s => s.id === `${tweet.id}-like`)}
-                          className={`py-2.5 rounded-xl border-2 border-black font-bungee text-[9px] transition-all ${submissions.some(s => s.id === `${tweet.id}-like`) ? 'bg-emerald-100 text-emerald-600' : 'bg-white text-black hover:bg-[#FF4D4D]/10'}`}
-                        >
-                          {submissions.some(s => s.id === `${tweet.id}-like`) ? 'LIKED' : 'LIKE'}
-                        </button>
-                        <button 
-                          onClick={() => verifyTweetAction(tweet.id, 'repost', tweet.points.repost)}
-                          disabled={!!verifyingId || submissions.some(s => s.id === `${tweet.id}-repost`)}
-                          className={`py-2.5 rounded-xl border-2 border-black font-bungee text-[9px] transition-all ${submissions.some(s => s.id === `${tweet.id}-repost`) ? 'bg-[#1EB7E9]/10 text-[#1EB7E9]' : 'bg-white text-black hover:bg-[#1EB7E9]/10'}`}
-                        >
-                          {submissions.some(s => s.id === `${tweet.id}-repost`) ? 'REPOSTED' : 'REPOST'}
-                        </button>
-                      </div>
+                <div className="space-y-8 min-h-[300px]">
+                  {isLoadingQuests ? (
+                    <div className="flex flex-col items-center justify-center h-48 gap-4 opacity-40">
+                      <Loader2 className="w-8 h-8 animate-spin text-black" />
+                      <p className="font-bungee text-[8px] tracking-[0.3em] text-black">FETCHING REAL-TIME DATA...</p>
                     </div>
-                  ))}
+                  ) : quests.length === 0 ? (
+                    <div className="py-8 text-center text-gray-300">
+                      <p className="font-bungee text-[10px]">FEED UNAVAILABLE</p>
+                    </div>
+                  ) : (
+                    quests.map(tweet => (
+                      <div key={tweet.id} className="space-y-4 border-b-2 border-gray-50 pb-6 last:border-0 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-[#9BDDFF] rounded-lg border-2 border-black flex items-center justify-center">
+                            <Ghost className="w-4 h-4 text-black" />
+                          </div>
+                          <div className="flex flex-col">
+                             <span className="font-black text-[9px] text-black uppercase tracking-tight">@theyeticoin</span>
+                             <span className="text-[7px] font-black text-gray-400 uppercase tracking-widest">{tweet.date}</span>
+                          </div>
+                        </div>
+                        <p className="text-[10px] font-bold text-gray-500 uppercase leading-relaxed italic">"{tweet.text}"</p>
+                        <div className="flex gap-4 mb-2">
+                           <div className="flex items-center gap-1">
+                              <Heart className="w-2.5 h-2.5 text-red-400 fill-current" />
+                              <span className="text-[8px] font-black text-slate-400">{tweet.likes}</span>
+                           </div>
+                           <div className="flex items-center gap-1">
+                              <Repeat className="w-2.5 h-2.5 text-blue-400" />
+                              <span className="text-[8px] font-black text-slate-400">{tweet.rts}</span>
+                           </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <button 
+                            onClick={() => verifyTweetAction(tweet.id, 'like', tweet.points.like)}
+                            disabled={!!verifyingId || submissions.some(s => s.id === `${tweet.id}-like`)}
+                            className={`py-2.5 rounded-xl border-2 border-black font-bungee text-[9px] transition-all ${submissions.some(s => s.id === `${tweet.id}-like`) ? 'bg-emerald-100 text-emerald-600' : 'bg-white text-black hover:bg-[#FF4D4D]/10 shadow-sm'}`}
+                          >
+                            {verifyingId === `${tweet.id}-like` ? '...' : submissions.some(s => s.id === `${tweet.id}-like`) ? 'LIKED' : 'LIKE'}
+                          </button>
+                          <button 
+                            onClick={() => verifyTweetAction(tweet.id, 'repost', tweet.points.repost)}
+                            disabled={!!verifyingId || submissions.some(s => s.id === `${tweet.id}-repost`)}
+                            className={`py-2.5 rounded-xl border-2 border-black font-bungee text-[9px] transition-all ${submissions.some(s => s.id === `${tweet.id}-repost`) ? 'bg-[#1EB7E9]/10 text-[#1EB7E9]' : 'bg-white text-black hover:bg-[#1EB7E9]/10 shadow-sm'}`}
+                          >
+                            {verifyingId === `${tweet.id}-repost` ? '...' : submissions.some(s => s.id === `${tweet.id}-repost`) ? 'REPOSTED' : 'REPOST'}
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
 
               <div className="bg-[#FFEA31] border-[4px] border-black rounded-[32px] p-6 neo-shadow text-black text-center space-y-4">
                 <Trophy className="w-10 h-10 mx-auto" />
-                <h3 className="font-bungee text-xl">THE PEAK</h3>
+                <h3 className="font-bungee text-xl uppercase text-black">THE PEAK</h3>
                 <p className="text-[9px] font-black uppercase opacity-60">High score leaderboard sync coming soon</p>
+                <div className="pt-2">
+                   <a 
+                    href="https://x.com/theyeticoin" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-black text-[#1EB7E9] px-4 py-2 rounded-xl text-[8px] font-bungee hover:scale-105 transition-transform"
+                   >
+                     VIEW ON X.COM <ExternalLink className="w-2.5 h-2.5" />
+                   </a>
+                </div>
               </div>
             </div>
           </div>

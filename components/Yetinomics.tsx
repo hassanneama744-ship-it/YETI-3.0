@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Yetinomics: React.FC = () => {
@@ -11,7 +10,7 @@ const Yetinomics: React.FC = () => {
         {/* Clean Yetinomics Header */}
         <div className="text-center mb-16 flex flex-col items-center gap-0">
           <h2 className="font-bungee text-4xl text-white drop-shadow-[4px_4px_0px_rgba(30,183,233,1)] uppercase text-center">COLD HARD</h2>
-          <h2 className="font-bungee text-7xl text-white drop-shadow-[4px_4px_0px_rgba(30,183,233,1)] uppercase text-center">YETINOMICS</h2>
+          <h2 className="font-bungee text-7xl text-white drop-shadow-[4px_4px_0px_rgba(30,183,233,1)] uppercase text-center">YETI NOMICS</h2>
         </div>
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
@@ -63,7 +62,7 @@ const Yetinomics: React.FC = () => {
             <div className="w-full max-w-md relative group">
               <div className="absolute -top-3 -left-3 bg-black text-[#9BDDFF] px-3 py-1 rounded-md text-[10px] font-black rotate-[-5deg] z-10">CONTRACT</div>
               <div className="bg-white border-[4px] border-black rounded-2xl p-6 neo-shadow overflow-hidden text-center">
-                <code className="text-[#1EB7E9] font-bold break-all">Yetixx...PumpFun...Soon</code>
+                <code className="text-[#1EB7E9] font-bold break-all">Yetixx...PumpFun...Burned</code>
               </div>
             </div>
           </div>
@@ -86,16 +85,16 @@ const Yetinomics: React.FC = () => {
           </div>
         </div>
 
-        {/* New Detailed Allocation Section with Pie Chart */}
+        {/* New Detailed Allocation Section with 100% Pie Chart */}
         <div className="w-full max-w-5xl bg-white border-[8px] border-black rounded-[60px] p-8 md:p-16 neo-shadow-lg flex flex-col md:flex-row items-center gap-12 relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#F0F9FF] rounded-full translate-x-1/2 -translate-y-1/2 -z-0"></div>
           
-          {/* Pie Chart SVG */}
+          {/* Pie Chart SVG - 100% Single Color */}
           <div className="relative z-10 w-full md:w-1/2 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 group">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
-                {/* Presale Slice - 70.31% */}
+                {/* Single 100% Slice */}
                 <circle
                   cx="50"
                   cy="50"
@@ -103,54 +102,18 @@ const Yetinomics: React.FC = () => {
                   fill="transparent"
                   stroke="#1EB7E9"
                   strokeWidth="20"
-                  strokeDasharray={`${70.31 * 2.513} ${100 * 2.513}`}
-                  className="transition-all duration-1000"
-                />
-                {/* Staking Reward & Airdrop - 8% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  fill="transparent"
-                  stroke="#C084FC"
-                  strokeWidth="20"
-                  strokeDasharray={`${8 * 2.513} ${100 * 2.513}`}
-                  strokeDashoffset={`${-70.31 * 2.513}`}
-                  className="transition-all duration-1000"
-                />
-                {/* Liquidity Slice - 21.69% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="40"
-                  fill="transparent"
-                  stroke="#FFEA31"
-                  strokeWidth="20"
-                  strokeDasharray={`${21.69 * 2.513} ${100 * 2.513}`}
-                  strokeDashoffset={`${-78.31 * 2.513}`}
+                  strokeDasharray="251.3 251.3"
                   className="transition-all duration-1000"
                 />
                 {/* Black Border Overlay */}
                 <circle cx="50" cy="50" r="50" fill="transparent" stroke="black" strokeWidth="4" />
                 <circle cx="50" cy="50" r="30" fill="transparent" stroke="black" strokeWidth="4" />
-                {/* Separator lines */}
-                <line x1="50" y1="0" x2="50" y2="20" stroke="black" strokeWidth="2" />
-                <line 
-                  x1="50" y1="0" x2="50" y2="20" 
-                  stroke="black" strokeWidth="2" 
-                  transform={`rotate(${(70.31 / 100) * 360} 50 50)`} 
-                />
-                <line 
-                  x1="50" y1="0" x2="50" y2="20" 
-                  stroke="black" strokeWidth="2" 
-                  transform={`rotate(${(78.31 / 100) * 360} 50 50)`} 
-                />
               </svg>
               
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="bg-white border-4 border-black p-4 rounded-full neo-shadow-sm flex flex-col items-center">
-                  <span className="font-bungee text-2xl text-black leading-none">SPLIT</span>
-                  <span className="font-black text-[8px] text-gray-400 uppercase tracking-widest">Protocol</span>
+                  <span className="font-bungee text-2xl text-black leading-none">FAIR</span>
+                  <span className="font-black text-[8px] text-gray-400 uppercase tracking-widest">LAUNCH</span>
                 </div>
               </div>
             </div>
@@ -160,65 +123,30 @@ const Yetinomics: React.FC = () => {
           <div className="w-full md:w-1/2 space-y-8 relative z-10">
             <div>
               <h3 className="font-bungee text-3xl text-black mb-6 uppercase tracking-tight">Supply Distribution</h3>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 
-                {/* Presale Item */}
+                {/* 100% Item */}
                 <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 bg-[#1EB7E9] border-2 border-black rounded-lg mt-1 shrink-0"></div>
+                  <div className="w-8 h-8 bg-[#1EB7E9] border-2 border-black rounded-xl mt-1 shrink-0"></div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-bungee text-xl text-black">70.31%</p>
-                      <p className="font-bungee text-sm text-[#1EB7E9] uppercase">Presale</p>
+                    <div className="flex items-center gap-3">
+                      <p className="font-bungee text-2xl text-black">100%</p>
+                      <p className="font-bungee text-sm text-[#1EB7E9] uppercase tracking-wide">PUMP.FUN BONDING CURVE</p>
                     </div>
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-relaxed">
-                      Allocated to <span className="text-green-600 font-black">DEV.Fun</span> Presale participants. Pure fair-launch mechanics.
+                    <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed mt-2">
+                      ENTIRE SUPPLY ALLOCATED TO THE BONDING CURVE. ZERO TEAM TOKENS. ZERO PRIVATE SALE. ZERO INSIDER SNIPING.
                     </p>
                   </div>
                 </div>
 
-                {/* Staking & Airdrop Item */}
-                <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 bg-[#C084FC] border-2 border-black rounded-lg mt-1 shrink-0"></div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-bungee text-xl text-black">8%</p>
-                      <p className="font-bungee text-sm text-[#C084FC] uppercase">Staking & Airdrop</p>
-                    </div>
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-relaxed">
-                      Rewards for active pack members and long-term stakers.
-                    </p>
-                    <div className="mt-2 bg-purple-50 border-2 border-dashed border-purple-200 p-3 rounded-xl">
-                      <p className="font-black text-[9px] text-purple-900">3 MONTH CLIFF + 2 MONTHS VESTING</p>
-                      <p className="text-[8px] font-bold text-purple-400 uppercase tracking-tighter mt-1">
-                        Ensuring zero sell-pressure during core development phases.
-                      </p>
-                    </div>
+                <div className="bg-slate-50 border-4 border-black border-dashed p-6 rounded-[32px] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🛡️</span>
+                    <p className="font-bungee text-sm text-black">PROTOCOL SECURITY</p>
                   </div>
-                </div>
-
-                {/* Liquidity Item */}
-                <div className="flex items-start gap-4">
-                  <div className="w-6 h-6 bg-[#FFEA31] border-2 border-black rounded-lg mt-1 shrink-0"></div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="font-bungee text-xl text-black">21.69%</p>
-                      <p className="font-bungee text-sm text-[#FFEA31] uppercase">Liquidity</p>
-                    </div>
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-relaxed">
-                      Reserved for Exchange and Dex liquidity and market stability.
-                    </p>
-                    
-                    {/* Builder Sub-Note */}
-                    <div className="mt-3 bg-slate-50 border-2 border-dashed border-black/10 p-3 rounded-xl">
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-2 h-2 rounded-full bg-black"></div>
-                        <p className="font-black text-[10px] text-black">1% BUILDER ALLOCATION</p>
-                      </div>
-                      <p className="text-[9px] font-bold text-gray-500 uppercase tracking-tighter">
-                        (Included in Liquidity) • 1 Month Cliff + 3 Months Linear Vesting.
-                      </p>
-                    </div>
-                  </div>
+                  <p className="text-[10px] font-black text-slate-500 uppercase leading-relaxed">
+                    EVERY SINGLE $YETI TOKEN IS INJECTED INTO THE LIQUIDITY POOL AND BONDING CURVE. THE TEAM MUST BUY FROM THE OPEN MARKET LIKE EVERY OTHER MEMBER OF THE PACK.
+                  </p>
                 </div>
 
               </div>
@@ -229,7 +157,7 @@ const Yetinomics: React.FC = () => {
                 <span className="text-2xl">🧊</span>
                 <span className="font-bungee text-xs text-black uppercase">Frost-Locked Verified</span>
               </div>
-              <div className="bg-[#1EB7E9] text-white px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest">
+              <div className="bg-black text-[#1EB7E9] px-3 py-1 rounded-md text-[8px] font-black uppercase tracking-widest neo-shadow-sm">
                 IMMUTABLE
               </div>
             </div>

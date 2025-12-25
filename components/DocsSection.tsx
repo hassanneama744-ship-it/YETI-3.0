@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 type DocTab = 'info' | 'agent' | 'lab' | 'swap' | 'roadmap' | 'tokenomics' | 'staking' | 'nft';
@@ -16,7 +15,7 @@ const DocCard: React.FC<DocCardProps> = ({ title, children }) => (
 );
 
 const ValueBox: React.FC<{ label: string; val: string }> = ({ label, val }) => (
-  <div className="bg-black text-white p-4 rounded-2xl border-2 border-black text-center">
+  <div className="bg-slate-50 text-black p-4 rounded-2xl border-2 border-black text-center neo-shadow-sm">
     <p className="text-[10px] font-black uppercase text-[#1EB7E9] tracking-widest mb-1">{label}</p>
     <p className="font-bungee text-xl">{val}</p>
   </div>
@@ -32,7 +31,7 @@ const RoadmapDeepDive: React.FC<{ step: string; title: string; items: { label: s
       {items.map((item, i) => (
         <div key={i} className={`${color} border-2 border-black/10 p-6 rounded-3xl space-y-2 group hover:border-black/30 transition-colors neo-shadow-sm`}>
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${textColor === 'text-white' ? 'bg-white' : 'bg-black'}`}></div>
+            <div className={`w-2 h-2 rounded-full ${textColor === 'text-[#9BDDFF]' ? 'bg-[#9BDDFF]' : 'bg-black'}`}></div>
             <h4 className={`font-bungee text-sm uppercase tracking-tight ${textColor}`}>{item.label}</h4>
           </div>
           <p className={`text-[10px] font-bold uppercase leading-relaxed tracking-wide opacity-80 ${textColor}`}>
@@ -66,13 +65,13 @@ const DocsSection: React.FC = () => {
             <DocCard title="1. THE $YETI PROTOCOL ORIGIN">
               <div className="space-y-6">
                 <p className="text-xl font-black text-black leading-relaxed uppercase tracking-tight">
-                  We are the first unified <span className="text-[#1EB7E9]">Swap engine</span>, elite <span className="text-[#1EB7E9]">YETI AGENT hub</span>, and viral <span className="text-[#1EB7E9]">Meme Generator</span> platform launched on <span className="text-green-600">PUMP.FUN</span>. 
+                  We are the first unified <span className="text-[#1EB7E9]">Swap engine</span>, elite <span className="text-[#1EB7E9]">YETI AGENT hub</span>, and viral <span className="text-[#1EB7E9]">Meme Generator</span> platform launched on <span className="text-green-600 font-black">PUMP.FUN</span>. 
                   <br /><br />
                   The Yeti doesn't just represent the winter—it controls it.
                 </p>
                 <div className="bg-slate-50 p-6 rounded-3xl border-2 border-black/5 space-y-4">
                   <h4 className="font-bungee text-black text-sm uppercase">BORN IN THE HIMALAYAS</h4>
-                  <p className="text-xs font-bold text-slate-500 uppercase leading-relaxed">
+                  <p className="text-xs font-bold text-slate-700 uppercase leading-relaxed">
                     While the rest of the market melts, the Yeti builds. $YETI was launched exclusively via PUMP.FUN to ensure a 100% fair launch with no team allocation, ensuring that the community—the pack—is the true owner of the protocol.
                   </p>
                 </div>
@@ -95,8 +94,8 @@ const DocsSection: React.FC = () => {
                     YETI AGENT IS A DUAL-CORE AI SYSTEM DESIGNED TO COORDINATE THE PACK'S SOCIAL DOMINANCE AND EXTRACT MARKET ALPHA THROUGH CRYSTALLINE LOGIC.
                   </p>
                   <div className="flex gap-4">
-                    <div className="bg-black text-[#1EB7E9] px-4 py-1.5 rounded-xl font-bungee text-[10px] neo-shadow-sm">MODEL: GEMINI-3-FLASH</div>
-                    <div className="bg-[#1EB7E9] text-black px-4 py-1.5 rounded-xl font-bungee text-[10px] neo-shadow-sm">SYNC: ACTIVE</div>
+                    <div className="bg-slate-200 text-[#1EB7E9] px-4 py-1.5 rounded-xl font-bungee text-[10px] neo-shadow-sm border-2 border-black">MODEL: GEMINI-3-FLASH</div>
+                    <div className="bg-[#1EB7E9] text-black px-4 py-1.5 rounded-xl font-bungee text-[10px] neo-shadow-sm border-2 border-black">SYNC: ACTIVE</div>
                   </div>
                 </div>
 
@@ -128,11 +127,11 @@ const DocsSection: React.FC = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-slate-50 p-4 rounded-2xl border-2 border-black/5">
                         <p className="font-bungee text-[10px] text-black">SYNC HANDLE</p>
-                        <p className="font-bold text-[9px] text-emerald-500 uppercase mt-1">+10 PTS</p>
+                        <p className="font-bold text-[9px] text-emerald-600 uppercase mt-1">+10 PTS</p>
                       </div>
                       <div className="bg-slate-50 p-4 rounded-2xl border-2 border-black/5">
                         <p className="font-bungee text-[10px] text-black">LIKE/REPOST</p>
-                        <p className="font-bold text-[9px] text-emerald-500 uppercase mt-1">+5/+15 PTS</p>
+                        <p className="font-bold text-[9px] text-emerald-600 uppercase mt-1">+5/+15 PTS</p>
                       </div>
                     </div>
                   </div>
@@ -140,16 +139,16 @@ const DocsSection: React.FC = () => {
 
                 <div className="space-y-6">
                   <h3 className="font-bungee text-xl text-black border-l-4 border-black pl-4 uppercase">THE PACK HIERARCHY</h3>
-                  <div className="bg-black text-white p-8 rounded-[40px] space-y-6 neo-shadow">
+                  <div className="bg-slate-100 text-black p-8 rounded-[40px] border-4 border-black space-y-6 neo-shadow">
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">RANKING TIERS BASED ON TOTAL FROST POINTS:</p>
                     <div className="space-y-4">
-                      <div className="flex justify-between items-center border-b border-white/10 pb-2">
+                      <div className="flex justify-between items-center border-b border-black/10 pb-2">
                         <span className="font-bungee text-sm text-gray-400">ROOKIE</span>
-                        <span className="font-bold text-[10px]">0 - 49 PTS</span>
+                        <span className="font-bold text-[10px] text-black">0 - 49 PTS</span>
                       </div>
-                      <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                        <span className="font-bungee text-sm text-white">SNOWBALLER</span>
-                        <span className="font-bold text-[10px]">50 - 99 PTS</span>
+                      <div className="flex justify-between items-center border-b border-black/10 pb-2">
+                        <span className="font-bungee text-sm text-black">SNOWBALLER</span>
+                        <span className="font-bold text-[10px] text-black">50 - 99 PTS</span>
                       </div>
                       <div className="flex justify-between items-center text-[#1EB7E9]">
                         <span className="font-bungee text-sm">YETI KING</span>
@@ -167,12 +166,12 @@ const DocsSection: React.FC = () => {
           <div className="space-y-10">
             <DocCard title="MEME LAB: NEURAL RENDER CORE">
               <div className="space-y-8">
-                <div className="bg-black text-white p-8 rounded-[40px] border-4 border-black neo-shadow space-y-4">
+                <div className="bg-slate-100 text-black p-8 rounded-[40px] border-4 border-black neo-shadow space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="font-bungee text-[#1EB7E9] text-xl">ENGINE OVERVIEW</h3>
                     <div className="bg-[#1EB7E9]/20 text-[#1EB7E9] px-3 py-1 rounded-xl text-[8px] font-black uppercase tracking-widest">Active v4.0</div>
                   </div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase leading-relaxed tracking-widest">
+                  <p className="text-[10px] font-bold text-slate-800 uppercase leading-relaxed tracking-widest">
                     The Yeti Meme Lab is a high-fidelity image generation workspace powered by Google Gemini Multi-Modal logic.
                   </p>
                 </div>
@@ -182,19 +181,19 @@ const DocsSection: React.FC = () => {
                   <div className="grid grid-cols-1 gap-6">
                     <div className="bg-[#FF4D4D]/5 border-2 border-[#FF4D4D]/20 p-6 rounded-[32px] space-y-2">
                       <h4 className="font-bungee text-lg text-black">🎲 CHAOS THEORY</h4>
-                      <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed">
+                      <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
                         Optimized for "Degen" culture. Prioritizes vibrant comic-book aesthetics, high-energy scenarios, and hilarious crypto-centric compositions.
                       </p>
                     </div>
                     <div className="bg-[#1EB7E9]/5 border-2 border-[#1EB7E9]/20 p-6 rounded-[32px] space-y-2">
                       <h4 className="font-bungee text-lg text-black">🎨 VECTOR ALPHA</h4>
-                      <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed">
+                      <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
                         Professional 2D Character design. Generates clean, flat-vector bipedal Yeti assets with consistent features. Ideal for branding and stickers.
                       </p>
                     </div>
                     <div className="bg-slate-50 border-2 border-black/5 p-6 rounded-[32px] space-y-2">
                       <h4 className="font-bungee text-lg text-black">❄️ RETRO BLIZZARD</h4>
-                      <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed">
+                      <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
                         90s Nostalgia Engine. Merges Vaporwave aesthetics with lo-fi grainy textures and soft pastel palettes for a "Winter Anime" vibe.
                       </p>
                     </div>
@@ -205,16 +204,16 @@ const DocsSection: React.FC = () => {
                   <h3 className="font-bungee text-xl text-black border-l-4 border-[#FFEA31] pl-4 uppercase">RENDER SCALES</h3>
                   <div className="grid grid-cols-3 gap-4">
                     <div className="bg-white border-2 border-black p-4 rounded-2xl text-center">
-                      <p className="font-bungee text-lg">1K</p>
-                      <p className="text-[7px] font-black uppercase">FLASH</p>
+                      <p className="font-bungee text-lg text-black">1K</p>
+                      <p className="text-[7px] font-black uppercase text-slate-400">FLASH</p>
                     </div>
                     <div className="bg-[#FFEA31]/20 border-2 border-black p-4 rounded-2xl text-center">
-                      <p className="font-bungee text-lg">2K</p>
-                      <p className="text-[7px] font-black uppercase">PRO</p>
+                      <p className="font-bungee text-lg text-black">2K</p>
+                      <p className="text-[7px] font-black uppercase text-slate-400">PRO</p>
                     </div>
                     <div className="bg-[#FFEA31] border-2 border-black p-4 rounded-2xl text-center">
-                      <p className="font-bungee text-lg">4K</p>
-                      <p className="text-[7px] font-black uppercase">ULTRA</p>
+                      <p className="font-bungee text-lg text-black">4K</p>
+                      <p className="text-[7px] font-black uppercase text-black">ULTRA</p>
                     </div>
                   </div>
                 </div>
@@ -227,9 +226,9 @@ const DocsSection: React.FC = () => {
           <div className="space-y-10">
             <DocCard title="FROST SWAP: HYBRID LIQUIDITY">
               <div className="space-y-8">
-                <div className="bg-black text-white p-8 rounded-[40px] border-4 border-black neo-shadow space-y-4">
+                <div className="bg-slate-100 text-black p-8 rounded-[40px] border-4 border-black neo-shadow space-y-4">
                   <h3 className="font-bungee text-[#1EB7E9] text-xl">ARCHITECTURE</h3>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase leading-relaxed tracking-widest">
+                  <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed tracking-widest">
                     Frost Swap provides sub-zero latency by switching between two liquidity layers depending on the token's lifecycle.
                   </p>
                 </div>
@@ -237,13 +236,13 @@ const DocsSection: React.FC = () => {
                 <div className="space-y-6">
                   <div className="bg-white border-2 border-black p-6 rounded-[32px] space-y-3">
                     <h4 className="font-bungee text-black flex items-center gap-2">🪐 JUPITER AGGREGATOR (V1)</h4>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase">
+                    <p className="text-[10px] font-bold text-slate-800 uppercase">
                       Post-migration engine. Aggregates liquidity from across Solana with **Strict Token List: OFF**, allowing the trade of any asset instantly.
                     </p>
                   </div>
                   <div className="bg-white border-2 border-black p-6 rounded-[32px] space-y-3">
                     <h4 className="font-bungee text-black flex items-center gap-2">💊 PUMP.FUN BONDING CURVE</h4>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase">
+                    <p className="text-[10px] font-bold text-slate-800 uppercase">
                       Launch phase engine. Used during the fair-launch period to track progress toward the 100% Raydium migration target.
                     </p>
                   </div>
@@ -262,7 +261,7 @@ const DocsSection: React.FC = () => {
                   title="THE AVALANCHE (Genesis)" 
                   color="bg-white"
                   items={[
-                    { label: "PRE-SALE ORIGINS", detail: "Fair launch genesis via Dev.FUN to ensure no team snipes and pure community ownership." },
+                    { label: "COMMUNITY BUILDING", detail: "Establishing the foundation of the pack through organic growth and unified social engagement." },
                     { label: "PUMP.FUN IGNITION", detail: "Bonding curve activation to establish early price discovery and holder base." },
                     { label: "MIGRATION PROTOCOL", detail: "Automated migration to Raydium upon 100% curve completion with DEX Screener boosts." },
                     { label: "FROST STAKING v1", detail: "Launch of the 'Freeze' protocol allowing users to lock tokens for points." }
@@ -297,7 +296,7 @@ const DocsSection: React.FC = () => {
                   step="STEP 4" 
                   title="PEAK DOMINATION (Legacy)" 
                   color="bg-[#0B2F44]"
-                  textColor="text-white"
+                  textColor="text-[#9BDDFF]"
                   items={[
                     { label: "GLOBAL SNOW DOMINATION", detail: "$YETI becomes the standard for AI-Meme utility on Solana." },
                     { label: "$100M MCAP PEAK", detail: "Achieving major market capitalization milestones through utility-driven growth." },
@@ -311,151 +310,180 @@ const DocsSection: React.FC = () => {
         );
       case 'tokenomics':
         return (
-          <DocCard title="6. THE COLD HARD YETINOMICS">
-            <div className="space-y-8">
-              <div className="grid grid-cols-2 gap-4">
-                <ValueBox label="Total Supply" val="1 BILLION" />
-                <ValueBox label="Buy/Sell Tax" val="0% / 0%" />
-              </div>
-              
-              <div className="bg-slate-50 border-2 border-black/5 p-8 rounded-[40px] space-y-6">
-                <h3 className="font-bungee text-black text-xl">SUPPLY ALLOCATION</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-4 h-4 bg-[#1EB7E9] rounded mt-1"></div>
-                    <div>
-                      <p className="font-bungee text-sm">70.31% - PRESALE</p>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase">Allocated to Dev.FUN fair-launch participants.</p>
+          <div className="space-y-12">
+            <DocCard title="6. THE COLD HARD YETINOMICS (DETAILED BREAKDOWN)">
+              <div className="space-y-10">
+                {/* Visualizer Header */}
+                <div className="flex flex-col md:flex-row items-center gap-12 bg-[#F0F9FF] border-4 border-black p-10 rounded-[40px] neo-shadow-sm">
+                  {/* Pie Chart SVG - 100% Community */}
+                  <div className="relative w-48 h-48 md:w-64 md:h-64 shrink-0">
+                    <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
+                      {/* Full 100% Community Slice */}
+                      <circle cx="50" cy="50" r="40" fill="transparent" stroke="#1EB7E9" strokeWidth="20" strokeDasharray="251.3 251.3" />
+                      {/* Outlines */}
+                      <circle cx="50" cy="50" r="50" fill="transparent" stroke="black" strokeWidth="2" />
+                      <circle cx="50" cy="50" r="30" fill="transparent" stroke="black" strokeWidth="2" />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                       <span className="font-bungee text-black text-xs">$YETI</span>
+                       <span className="text-[6px] font-black text-slate-400">100%</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-4 h-4 bg-[#C084FC] rounded mt-1"></div>
-                    <div>
-                      <p className="font-bungee text-sm">8% - REWARDS & AIRDROPS</p>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase">3 Month Cliff + 2 Months Vesting.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-4 h-4 bg-[#FFEA31] rounded mt-1"></div>
-                    <div>
-                      <p className="font-bungee text-sm">21.69% - LIQUIDITY / BUILDER</p>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase">Includes 1% Builder allocation (1 Month Cliff + 3 Months Vesting).</p>
-                    </div>
+
+                  <div className="space-y-6 flex-grow">
+                     <h3 className="font-bungee text-2xl text-black uppercase">THE COLD HARD SPLIT</h3>
+                     <div className="space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-[#1EB7E9] border-2 border-black rounded"></div>
+                          <span className="font-bungee text-sm text-black uppercase">100% - PUMP.FUN FAIR LAUNCH</span>
+                        </div>
+                        <div className="bg-slate-50 border-2 border-dashed border-black/10 p-4 rounded-2xl">
+                          <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest leading-relaxed">
+                            ZERO TEAM ALLOCATION • ZERO PRIVATE SALE • ZERO INSIDER WALLETS • 100% PURE PACK POWER
+                          </p>
+                        </div>
+                     </div>
                   </div>
                 </div>
+
+                {/* Quantitative Details */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <ValueBox label="TOTAL SUPPLY" val="1,000,000,000" />
+                  <ValueBox label="PLATFORM" val="PUMP.FUN" />
+                  <ValueBox label="BUY TAX" val="0%" />
+                  <ValueBox label="SELL TAX" val="0%" />
+                </div>
+
+                {/* Granular Distribution Breakdown */}
+                <div className="space-y-8 pt-6">
+                   <h3 className="font-bungee text-black text-2xl uppercase tracking-tight border-l-4 border-black pl-4">SUPPLY ARCHITECTURE</h3>
+                   
+                   <div className="grid grid-cols-1 gap-6">
+                     <div className="bg-slate-50 border-2 border-black/10 p-8 rounded-[40px] space-y-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-[#1EB7E9] border-2 border-black rounded-lg"></div>
+                          <h4 className="font-bungee text-xl text-black">THE AVALANCHE PROTOCOL (100%)</h4>
+                        </div>
+                        <p className="text-[11px] font-bold text-slate-700 uppercase leading-relaxed">
+                          $YETI OPERATES ON A "PURE SNOW" DISTRIBUTION MODEL. EVERY SINGLE TOKEN IS INJECTED INTO THE PUMP.FUN BONDING CURVE. THIS ENSURES THAT THE PACK CONTROLS THE PRICE DISCOVERY PROCESS FROM GENESIS. THERE ARE NO HIDDEN WALLETS OR TEAM RESERVES TO MELT THE CHART.
+                        </p>
+                     </div>
+
+                     <div className="bg-[#FFEA31]/5 border-2 border-black/10 p-8 rounded-[40px] space-y-4">
+                        <h4 className="font-bungee text-lg text-black">LIQUIDITY PERMANENCE</h4>
+                        <p className="text-[11px] font-bold text-slate-700 uppercase leading-relaxed">
+                          UPON SUCCESSFUL COMPLETION OF THE BONDING CURVE, ALL REMAINING LIQUIDITY IS MIGRATED TO RAYDIUM AND THE LP TOKENS ARE AUTOMATICALLY BURNED. THE ICE IS LOCKED FOREVER.
+                        </p>
+                     </div>
+                   </div>
+                </div>
+
+                {/* Final Security Note */}
+                <div className="bg-black p-8 rounded-[40px] border-4 border-black text-center space-y-2">
+                   <h3 className="font-bungee text-[#1EB7E9] text-xl uppercase">ANTI-MELT SECURITY</h3>
+                   <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
+                     THE CONTRACT IS FULLY IMMUTABLE. NO MINT FUNCTIONS. NO BLACKLISTS. THE PEAK IS PROTECTED BY SUB-ZERO LOGIC.
+                   </p>
+                </div>
               </div>
-            </div>
-          </DocCard>
+            </DocCard>
+          </div>
         );
       case 'staking':
         return (
-          <DocCard title="7. FROZEN VAULT: STAKING PROTOCOLS">
-            <div className="space-y-12">
-              {/* Introduction */}
-              <div className="bg-slate-50 p-8 rounded-[40px] border-2 border-black/5 space-y-4">
-                <h3 className="font-bungee text-black text-xl uppercase">VAULT OVERVIEW</h3>
-                <p className="text-[11px] font-bold text-slate-700 uppercase leading-relaxed">
-                  The Frozen Vault is a sub-zero secure environment where $YETI holders can lock their assets to generate <span className="text-[#1EB7E9]">Frost Points (FP)</span>. FP is the primary metric used to determine ecosystem standing, whitelist priority, and airdrop eligibility.
-                </p>
-              </div>
-
-              {/* Accumulation Mechanics */}
-              <div className="space-y-6">
-                <h3 className="font-bungee text-black text-xl border-l-4 border-[#1EB7E9] pl-4 uppercase">ACCUMULATION MECHANICS</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-white border-2 border-black p-6 rounded-3xl space-y-2">
-                    <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Base Earning Rate</p>
-                    <p className="font-bungee text-lg text-black">10 PTS / 10K $YETI / HR</p>
-                    <p className="text-[9px] font-bold text-slate-500 uppercase leading-tight mt-2">
-                      Points are calculated per second and updated in real-time within the dashboard.
-                    </p>
-                  </div>
-                  <div className="bg-white border-2 border-black p-6 rounded-3xl space-y-2">
-                    <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Withdrawal Rules</p>
-                    <p className="font-bungee text-lg text-[#FF4D4D]">INSTANT UNSTAKE</p>
-                    <p className="text-[9px] font-bold text-slate-500 uppercase leading-tight mt-2">
-                      Warning: Unstaking resets your current point accumulation streak and Diamond Hands bonus progress.
-                    </p>
-                  </div>
+          <div className="space-y-12">
+            <DocCard title="7. FROZEN VAULT: STAKING PROTOCOLS (DETAILED)">
+              <div className="space-y-10">
+                {/* Intro */}
+                <div className="bg-[#F0F9FF] border-2 border-black rounded-[40px] p-8 space-y-4">
+                  <h3 className="font-bungee text-black text-xl border-l-4 border-black pl-4 uppercase">VAULT ARCHITECTURE</h3>
+                  <p className="text-[11px] font-bold text-slate-800 uppercase leading-relaxed tracking-wide">
+                    The Frozen Vault is a sub-zero secure environment where $YETI holders can lock their assets to generate <span className="text-[#1EB7E9]">Frost Points (FP)</span>. FP determines your rank within the pack and provides direct access to the most exclusive tiers of the ecosystem.
+                  </p>
                 </div>
-              </div>
 
-              {/* Hierarchy Levels */}
-              <div className="space-y-6">
-                <h3 className="font-bungee text-black text-xl border-l-4 border-[#FFEA31] pl-4 uppercase">THE PACK HIERARCHY (TIERS)</h3>
-                <div className="bg-black text-white p-8 rounded-[40px] space-y-6 neo-shadow">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">FP THRESHOLDS & WHITELIST PROBABILITIES:</p>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                      <span className="font-bungee text-sm text-orange-400">BRONZE</span>
-                      <span className="font-bold text-[10px] text-gray-300">0 - 2,000 PTS (20% CHANCE)</span>
+                {/* Logic Deep Dive */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <h4 className="font-bungee text-lg text-black uppercase">ACCUMULATION LOGIC</h4>
+                    <div className="bg-white border-4 border-black p-6 rounded-[32px] neo-shadow-sm space-y-2">
+                       <p className="text-[10px] font-black text-[#1EB7E9] uppercase">Base Emission</p>
+                       <p className="font-bungee text-xl text-black">10 PTS / 10K $YETI / HR</p>
+                       <p className="text-[9px] font-bold text-slate-500 uppercase leading-snug">
+                         Points are calculated per second and updated in real-time. Unstaking resets your current accumulation streak.
+                       </p>
                     </div>
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                      <span className="font-bungee text-sm text-slate-400">SILVER</span>
-                      <span className="font-bold text-[10px] text-gray-300">2,000 - 4,000 PTS (40% CHANCE)</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                      <span className="font-bungee text-sm text-[#FFEA31]">GOLD</span>
-                      <span className="font-bold text-[10px] text-gray-300">4,000 - 6,000 PTS (60% CHANCE)</span>
-                    </div>
-                    <div className="flex justify-between items-center border-b border-white/10 pb-2">
-                      <span className="font-bungee text-sm text-[#3B82F6]">DIAMOND</span>
-                      <span className="font-bold text-[10px] text-gray-300">6,000 - 8,000 PTS (80% CHANCE)</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="font-bungee text-sm text-[#FF4D4D]">YETI KING</span>
-                      <span className="font-bold text-[10px] text-gray-300">8,000+ PTS (100% CHANCE)</span>
+                  </div>
+                  <div className="space-y-6">
+                    <h4 className="font-bungee text-lg text-black uppercase">THE FROST MULTIPLIERS</h4>
+                    <div className="bg-[#FFEA31]/10 border-4 border-black p-6 rounded-[32px] neo-shadow-sm space-y-2">
+                       <p className="text-[10px] font-black text-yellow-600 uppercase">Early Staker Boost</p>
+                       <p className="font-bungee text-xl text-black">1.5X PERMANENT</p>
+                       <p className="text-[9px] font-bold text-slate-500 uppercase leading-snug">
+                         Available only to those who join the vault in the first 7 days of launch. Tied to your wallet address.
+                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Multipliers & Bonuses */}
-              <div className="space-y-6">
-                <h3 className="font-bungee text-black text-xl border-l-4 border-black pl-4 uppercase">BOOSTS & MULTIPLIERS</h3>
-                <div className="grid grid-cols-1 gap-6">
-                  <div className="bg-[#9BDDFF]/10 border-2 border-[#9BDDFF]/30 p-6 rounded-[32px] space-y-2">
-                    <h4 className="font-bungee text-lg text-black">⚡ EARLY STAKER MULTIPLIER</h4>
-                    <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
-                      Participate in the first 7 days of the vault launch to receive a permanent <span className="text-[#1EB7E9]">1.5x Multiplier</span> on all Frost Point accumulation. This boost is tied to your wallet address.
-                    </p>
-                  </div>
-                  <div className="bg-[#FFEA31]/10 border-2 border-[#FFEA31]/30 p-6 rounded-[32px] space-y-2">
-                    <h4 className="font-bungee text-lg text-black">💎 DIAMOND HANDS BONUS</h4>
-                    <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
-                      Hold your position for 30 consecutive days without unstaking to trigger a one-time <span className="text-emerald-600">3,000 Point Bonus</span>.
-                    </p>
-                  </div>
+                {/* Hierarchy Table */}
+                <div className="space-y-6">
+                   <h3 className="font-bungee text-2xl text-black uppercase border-b-4 border-black pb-2">THE PACK HIERARCHY</h3>
+                   <div className="bg-slate-100 border-4 border-black rounded-[40px] p-8 space-y-4 neo-shadow">
+                      <div className="grid grid-cols-3 gap-4 border-b-2 border-black/10 pb-4">
+                         <span className="font-bungee text-[10px] text-slate-400">RANK TIER</span>
+                         <span className="font-bungee text-[10px] text-slate-400">FP THRESHOLD</span>
+                         <span className="font-bungee text-[10px] text-slate-400">WL CHANCE</span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center py-2 border-b border-black/5">
+                        <span className="font-bungee text-sm text-orange-600">BRONZE</span>
+                        <span className="font-bold text-[10px] text-black">0 - 2,000 PTS</span>
+                        <span className="font-bold text-[10px] text-black">20%</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-b border-black/5">
+                        <span className="font-bungee text-sm text-slate-500">SILVER</span>
+                        <span className="font-bold text-[10px] text-black">2,000 - 4,000 PTS</span>
+                        <span className="font-bold text-[10px] text-black">40%</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-b border-black/5">
+                        <span className="font-bungee text-sm text-yellow-600">GOLD</span>
+                        <span className="font-bold text-[10px] text-black">4,000 - 6,000 PTS</span>
+                        <span className="font-bold text-[10px] text-black">60%</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-b border-black/5">
+                        <span className="font-bungee text-sm text-blue-600">DIAMOND</span>
+                        <span className="font-bold text-[10px] text-black">6,000 - 8,000 PTS</span>
+                        <span className="font-bold text-[10px] text-black">80%</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2">
+                        <span className="font-bungee text-sm text-red-600">YETI KING</span>
+                        <span className="font-bold text-[10px] text-black">8,000+ PTS</span>
+                        <span className="font-bold text-[10px] text-black">100%</span>
+                      </div>
+                   </div>
                 </div>
               </div>
-
-              {/* Governance */}
-              <div className="bg-[#1EB7E9] border-[4px] border-black rounded-[40px] p-8 text-black space-y-4 neo-shadow-sm">
-                <h3 className="font-bungee text-xl uppercase">DAO GOVERNANCE RIGHTS</h3>
-                <p className="text-[11px] font-bold uppercase leading-relaxed opacity-80">
-                  Stakers who maintain a balance of at least <span className="font-black">100,000 $YETI</span> within the Frozen Vault unlock voting permissions for the <span className="underline">Coldest Charity</span>. This allows the pack to collectively decide which Himalayan conservation projects receive community grant allocations.
-                </p>
-              </div>
-            </div>
-          </DocCard>
+            </DocCard>
+          </div>
         );
       case 'nft':
         return (
           <DocCard title="8. THE FROZEN NFT COLLECTION">
             <div className="space-y-12">
               <div className="bg-slate-50 p-8 rounded-[40px] border-2 border-black/5 space-y-4">
-                <h3 className="font-bungee text-black text-xl">COLLECTION SPECS</h3>
+                <h3 className="font-bungee text-black text-xl uppercase">COLLECTION SPECS</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                   <div className="bg-white p-4 rounded-2xl border-2 border-black/10">
+                   <div className="bg-white p-4 rounded-2xl border-2 border-black/10 text-black">
                      <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Total Supply</p>
-                     <p className="font-bungee text-lg text-black">3,333 UNITS</p>
+                     <p className="font-bungee text-lg">3,333 UNITS</p>
                    </div>
-                   <div className="bg-white p-4 rounded-2xl border-2 border-black/10">
+                   <div className="bg-white p-4 rounded-2xl border-2 border-black/10 text-black">
                      <p className="text-[8px] font-black text-gray-400 uppercase tracking-widest">Mint Price</p>
                      <p className="font-bungee text-lg text-[#1EB7E9]">0.1 SOL</p>
                    </div>
                 </div>
-                <p className="text-[10px] font-bold text-slate-600 uppercase leading-relaxed mt-4">
+                <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed mt-4">
                   NFTs grant direct multipliers for $YETI staking and exclusive access to high-fidelity generation profiles in the Meme Lab.
                 </p>
               </div>
@@ -465,68 +493,35 @@ const DocsSection: React.FC = () => {
                 
                 <div className="grid grid-cols-1 gap-6">
                   {/* COMMON */}
-                  <div className="bg-white border-2 border-black p-6 rounded-[32px] space-y-2">
+                  <div className="bg-white border-2 border-black p-6 rounded-[32px] space-y-2 text-black">
                     <div className="flex justify-between items-center">
-                      <h4 className="font-bungee text-lg text-black">SNOW BALLER (COMMON)</h4>
-                      <span className="bg-slate-100 px-3 py-1 rounded-xl text-[8px] font-black text-black">POWER: 17%</span>
+                      <h4 className="font-bungee text-lg">SNOW BALLER (COMMON)</h4>
+                      <span className="bg-slate-100 px-3 py-1 rounded-xl text-[8px] font-black">POWER: 17%</span>
                     </div>
                     <p className="text-[10px] font-bold text-slate-700 uppercase leading-relaxed">
-                      The foundation of the pack. These Yetis provide the baseline entry into the ecosystem, offering standard staking rewards and access to the basic Meme Lab 1K rendering engine.
-                    </p>
-                  </div>
-
-                  {/* UNCOMMON */}
-                  <div className="bg-[#4ADE80]/10 border-2 border-[#4ADE80]/30 p-6 rounded-[32px] space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-bungee text-lg text-black">FROST FOOT (UNCOMMON)</h4>
-                      <span className="bg-[#4ADE80] px-3 py-1 rounded-xl text-[8px] font-black text-black">POWER: 33%</span>
-                    </div>
-                    <p className="text-[10px] font-bold text-slate-800 uppercase leading-relaxed">
-                      Experienced climbers with enhanced cold resistance. These units provide a 1.2x boost to Frost Point accumulation compared to the baseline.
-                    </p>
-                  </div>
-
-                  {/* RARE */}
-                  <div className="bg-[#3B82F6]/10 border-2 border-[#3B82F6]/30 p-6 rounded-[32px] space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-bungee text-lg text-black">GLACIER SCOUT (RARE)</h4>
-                      <span className="bg-[#3B82F6] px-3 py-1 rounded-xl text-[8px] font-black text-white">POWER: 50%</span>
-                    </div>
-                    <p className="text-[10px] font-bold text-slate-900 uppercase leading-relaxed">
-                      The reconnaissance elite. Scouts hold 50% power, granting significant voting weight in the Yeti DAO and priority access to limited ecosystem alpha drops.
-                    </p>
-                  </div>
-
-                  {/* EPIC */}
-                  <div className="bg-[#C084FC]/10 border-2 border-[#C084FC]/30 p-6 rounded-[32px] space-y-2">
-                    <div className="flex justify-between items-center">
-                      <h4 className="font-bungee text-lg text-black">STORM BREAKER (EPIC)</h4>
-                      <span className="bg-[#C084FC] px-3 py-1 rounded-xl text-[8px] font-black text-black">POWER: 67%</span>
-                    </div>
-                    <p className="text-[10px] font-bold text-slate-800 uppercase leading-relaxed">
-                      Masters of the blizzard who control the weather. Epic Yetis unlock the Gemini 3 Pro (2K) rendering engine for their owners in the Meme Lab.
+                      The base unit. Offers access to the 1K Meme Lab renderer and standard vault rewards.
                     </p>
                   </div>
 
                   {/* LEGENDARY */}
-                  <div className="bg-[#FFEA31]/10 border-2 border-[#FFEA31]/30 p-6 rounded-[32px] space-y-2">
+                  <div className="bg-[#FFEA31]/10 border-2 border-[#FFEA31]/30 p-6 rounded-[32px] space-y-2 text-black">
                     <div className="flex justify-between items-center">
-                      <h4 className="font-bungee text-lg text-black">GOLDEN HIMALAYA (LEGENDARY)</h4>
-                      <span className="bg-[#FFEA31] px-3 py-1 rounded-xl text-[8px] font-black text-black">POWER: 83%</span>
+                      <h4 className="font-bungee text-lg">GOLDEN HIMALAYA (LEGENDARY)</h4>
+                      <span className="bg-[#FFEA31] px-3 py-1 rounded-xl text-[8px] font-black">POWER: 83%</span>
                     </div>
                     <p className="text-[10px] font-bold text-slate-900 uppercase leading-relaxed">
-                      Legends spoken of in the oldest void prophecies. Owners receive maximum whitelist priority for all future sub-protocol launches and sub-zero staking multipliers.
+                      Maximum whitelist priority and high-tier staking multipliers. Unlocks 2K rendering.
                     </p>
                   </div>
 
                   {/* MYTHICAL */}
-                  <div className="bg-[#FF4D4D]/10 border-2 border-[#FF4D4D]/30 p-6 rounded-[32px] space-y-2">
+                  <div className="bg-[#FF4D4D]/10 border-2 border-[#FF4D4D]/30 p-6 rounded-[32px] space-y-2 text-black">
                     <div className="flex justify-between items-center">
                       <h4 className="font-bungee text-lg text-[#FF4D4D]">YETI OVERLORD (MYTHICAL)</h4>
-                      <span className="bg-[#FF4D4D] px-3 py-1 rounded-xl text-[8px] font-black text-white">POWER: 100%</span>
+                      <span className="bg-[#FF4D4D] px-3 py-1 rounded-xl text-[8px] font-black text-red-950">POWER: 100%</span>
                     </div>
                     <p className="text-[10px] font-bold text-red-950 uppercase leading-relaxed">
-                      The supreme rulers of the peak. Only 33 exist. Overlords grant 4K rendering access, full DAO veto rights for charity proposals, and the highest possible yield in the Frozen Vault.
+                      Only 33 exist. Unlocks 4K rendering and veto rights in DAO voting proposals.
                     </p>
                   </div>
                 </div>
@@ -546,7 +541,7 @@ const DocsSection: React.FC = () => {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="font-bungee text-5xl md:text-8xl text-black drop-shadow-[4px_4px_0px_rgba(30,183,233,1)] uppercase">PROTOCOL DOCS</h1>
-          <div className="inline-block bg-black text-[#1EB7E9] px-6 py-2 rounded-xl font-bungee text-sm neo-shadow uppercase">
+          <div className="inline-block bg-[#F0F9FF] text-[#1EB7E9] px-6 py-2 rounded-xl border-4 border-black font-bungee text-sm neo-shadow uppercase">
             v3.2 YETI AGENT PROTOCOL
           </div>
         </div>
@@ -576,8 +571,8 @@ const DocsSection: React.FC = () => {
         <div className="text-center pt-10">
            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Still have questions?</p>
            <div className="flex justify-center gap-4">
-             <button className="bg-white border-2 border-black px-6 py-2 rounded-xl font-bungee text-xs hover:bg-[#9BDDFF] transition-colors uppercase">TELEGRAM</button>
-             <button className="bg-white border-2 border-black px-6 py-2 rounded-xl font-bungee text-xs hover:bg-[#1EB7E9] transition-colors uppercase">X (TWITTER)</button>
+             <button className="bg-white border-2 border-black px-6 py-2 rounded-xl font-bungee text-xs text-black hover:bg-[#9BDDFF] transition-colors uppercase">TELEGRAM</button>
+             <button className="bg-white border-2 border-black px-6 py-2 rounded-xl font-bungee text-xs text-black hover:bg-[#1EB7E9] transition-colors uppercase">X (TWITTER)</button>
            </div>
         </div>
       </div>
